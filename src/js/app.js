@@ -1,4 +1,4 @@
-import '../scss/index.scss';
+import '../scss/app.scss';
 
 class Person {
   constructor(firstName, lastName) {

@@ -28,19 +28,18 @@ module.exports = {
             options: {
               presets: ['env']
             }
-          },
-          'eslint-loader'
+          }
         ]  
       },
       {
-        test: /\.scss$/,
-        exclude: /(node_modules)/,
+        test: /\.css$/,
         use: ExtractTextPlugin.extract({
           use: [
             {
               loader: 'css-loader',
               options: {
-                minimize: true
+                minimize: true,
+                sourceMap: true
               }
             },
             {
@@ -48,12 +47,11 @@ module.exports = {
               options: {
                 ident: 'postcss',
                 plugins: (loader) => [
-                  require('stylelint')(),
                   require('autoprefixer')()
-                ]
+                ],
+                sourceMap: true
               }
-            },
-            'sass-loader'
+            }
           ],
           fallback: 'style-loader'
         })

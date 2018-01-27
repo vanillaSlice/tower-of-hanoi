@@ -3,25 +3,25 @@
 Tower of Hanoi puzzle written to practice using Babel and Webpack.
 A working version can be viewed [here](https://vanillaslice.github.io/tower-of-hanoi/).
 
-# Background
+## Background
 TODO
 
-# Installing dependencies
+## Installing dependencies
 ```
 yarn install
 ```
 
-# Running locally
+## Running locally
 ```
 yarn start
 ```
 
-# Building distribution files
+## Building distribution files
 ```
 yarn build
 ```
 
-# Deploy
+## Deploy
 ```
 yarn deploy
 ```

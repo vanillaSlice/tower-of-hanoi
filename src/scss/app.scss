@@ -1,6 +1,113 @@
+.container {
+  margin: 0 auto;
+  max-width: 58.5rem;
+  padding: 0 0.75rem 2.68rem;
+  width: 100%;
+}
+
+.row {
+  max-width: 40rem;
+}
+
+.controls {
+  max-width: 25rem;
+}
 
 
-body {
-  background-color: grey;
-  display: flex;
+.towers {
+  max-width: 800px;
+  position: relative;
+  width: 100%;
+}
+
+.disk {
+  height: 1.5rem;
+  position: absolute;
+  transition: all 235ms ease 0s;
+  z-index: 2;
+}
+
+.disk.clickable:hover {
+  transform: scale(1.1) translateY(-5px);
+}
+
+.disk.clickable {
+  cursor: pointer;
+}
+
+.disk-1 {
+  bottom: 270px;
+  left: 45%;
+  width: 10%;
+}
+
+.disk-2 {
+  bottom: 240px;
+  left: 40%;
+  width: 20%;
+}
+
+.disk-3 {
+  bottom: 210px;
+  left: 35%;
+  width: 30%;
+}
+
+.disk-4 {
+  bottom: 180px;
+  left: 30%;
+  width: 40%;
+}
+
+.disk-5 {
+  bottom: 150px;
+  left: 25%;
+  width: 50%;
+}
+
+.disk-6 {
+  bottom: 120px;
+  left: 20%;
+  width: 60%;
+}
+
+.disk-7 {
+  bottom: 90px;
+  left: 15%;
+  width: 70%;
+}
+
+.disk-8 {
+  bottom: 60px;
+  left: 10%;
+  width: 80%;
+}
+
+.disk-9 {
+  bottom: 30px;
+  left: 5%;
+  width: 90%;
+}
+
+.disk-10 {
+  bottom: 0;
+  width: 100%;
+}
+
+.tower {
+  border-bottom: 2px solid #41403e;
+  position: relative;
+
+  &.col {
+    padding: 0;
+  }
+}
+
+.line {
+  border-left: 2px solid #41403e;
+  height: 320px;
+  margin: 0 auto;
+  position: relative;
+  width: 2px;
+  z-index: 1;
 }

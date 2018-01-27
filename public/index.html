@@ -1,14 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Tower of Hanoi</title>
-  <link rel="stylesheet" href="./css/styles.css">
+  <meta name="description" content="Tower of Hanoi puzzle">
+  <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png">
+  <link rel="manifest" href="./manifest.json">
+  <link rel="mask-icon" href="./safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="apple-mobile-web-app-title" content="Tower of Hanoi">
+  <meta name="application-name" content="Tower of Hanoi">
+  <meta name="theme-color" content="#ffffff">
+  <meta name="msapplication-config" content="./browserconfig.xml">
 </head>
+
 <body>
-  In progress
-  <script src="./js/bundle.js"></script>
+  <div class="container">
+    <div class="text-center">
+      <h1>Tower of Hanoi</h1>
+    </div>
+    <div class="row flex-center">
+      <div class="alert alert-primary margin-bottom-none text-center">
+        Move all the disks over to the third tower.
+        <br> You cannot place a larger disk onto a smaller disk.
+      </div>
+    </div>
+    <div class="controls row flex-middle text-center">
+      <div class="col col-12 sm-5 padding-small">
+        <span>Disks:&nbsp;</span>
+        <span class="js-disks-label"></span>
+        <button class="js-decrease-disks-btn btn-small margin-none">&#9660;</button>
+        <button class="js-increase-disks-btn btn-small margin-none">&#9650;</button>
+      </div>
+      <div class="col col-12 sm-3 padding-small">
+        <span>Moves:&nbsp;</span>
+        <span class="js-current-moves-label"></span>
+      </div>
+      <div class="col col-12 sm-4 padding-small">
+        <button class="js-restart-btn btn-small margin-none">Restart</button>
+        <button class="js-solve-btn btn-small margin-none">Solve</button>
+      </div>
+    </div>
+
+    <div class="towers row flex-middle">
+      <div class="tower col col-4">
+        <div class="line"></div>
+        <div class="border border-6 clickable disk disk-1 background-secondary"></div>
+        <div class="border border-2 disk disk-2 background-success"></div>
+        <div class="border border-5 disk disk-3 background-warning"></div>
+        <div class="border border-4 disk disk-4 background-danger"></div>
+        <div class="border border-2 disk disk-5 background-secondary"></div>
+        <div class="border border-5 disk disk-6 background-success"></div>
+        <div class="border border-4 disk disk-7 background-warning"></div>
+        <div class="border border-6 disk disk-8 background-danger"></div>
+        <div class="border border-6 disk disk-9 background-secondary"></div>
+        <div class="border border-5 disk disk-10 background-success"></div>
+      </div>
+      <div class="tower col col-4">
+        <div class="line"></div>
+      </div>
+      <div class="tower col col-4">
+        <div class="line"></div>
+      </div>
+    </div>
+
+    <div class="row flex-right margin-bottom-none">
+      <span>Minimum moves:&nbsp;</span>
+      <span class="js-min-moves-label"></span>
+    </div>
+  </div>
 </body>
+
 </html>

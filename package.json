@@ -4,15 +4,13 @@
   "description": "Tower of Hanoi puzzle written to practice using Babel and Webpack",
   "author": "Mike Lowe",
   "private": true,
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/vanillaSlice/tower-of-hanoi.git"
+  "dependencies": {
+    "papercss": "^1.4.1"
   },
   "devDependencies": {
     "autoprefixer": "^7.2.5",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
-    "babel-minify-webpack-plugin": "^0.2.0",
     "babel-polyfill": "^6.26.0",
     "babel-preset-env": "^1.6.1",
     "clean-webpack-plugin": "^0.1.17",
@@ -20,29 +18,40 @@
     "css-loader": "^0.28.9",
     "eslint": "^4.16.0",
     "eslint-config-airbnb": "^16.1.0",
-    "eslint-loader": "^1.9.0",
     "eslint-plugin-import": "^2.8.0",
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-react": "^7.5.1",
     "extract-text-webpack-plugin": "^3.0.2",
+    "file-loader": "^1.1.6",
     "gh-pages": "^1.1.0",
     "html-webpack-plugin": "^2.30.1",
     "node-sass": "^4.7.2",
     "npm-run-all": "^4.1.2",
     "postcss-loader": "^2.0.10",
-    "sass-loader": "^6.0.6",
     "style-loader": "^0.19.1",
     "stylelint": "^8.4.0",
-    "stylelint-config-recommended-scss": "^3.0.0",
+    "stylelint-config-sass-guidelines": "^4.1.0",
+    "stylelint-order": "^0.8.0",
     "stylelint-scss": "^2.2.0",
+    "uglifyjs-webpack-plugin": "^1.1.6",
+    "url-loader": "^0.6.2",
     "webpack": "^3.10.0",
     "webpack-dev-server": "^2.11.1",
     "webpack-merge": "^4.1.1"
   },
+  "homepage": "https://vanillaslice.github.io/tower-of-hanoi/",
   "scripts": {
-    "start": "webpack-dev-server --open --config webpack.dev.js",
-    "build": "webpack --config webpack.prod.js",
-    "deploy:gh-pages": "gh-pages -d dist",
-    "deploy": "run-s build deploy:gh-pages"
+    "lint": "run-s lint:*",
+    "lint:js": "eslint src/js",
+    "lint:scss": "stylelint src/scss",
+    "prebuild": "run-s lint",
+    "build": "run-s build:*",
+    "build:css": "node-sass src/scss -o src/css",
+    "build:webpack": "webpack --config webpack.prod.js",
+    "watch:scss": "node-sass src/scss -o src/css -w",
+    "start": "run-p watch:scss start:*",
+    "start:webpack": "webpack-dev-server --open --config webpack.dev.js",
+    "predeploy": "run-s build",
+    "deploy": "gh-pages -d dist"
   }
 }

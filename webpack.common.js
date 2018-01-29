@@ -18,24 +18,20 @@ module.exports = {
   },
 
   module: {
-    rules: [
-      {
+    rules: [{
         test: /\.js$/,
         exclude: /(node_modules)/,
-        use: [
-          {
-            loader: 'babel-loader',
-            options: {
-              presets: ['env']
-            }
+        use: [{
+          loader: 'babel-loader',
+          options: {
+            presets: ['env']
           }
-        ]  
+        }]
       },
       {
         test: /\.css$/,
         use: ExtractTextPlugin.extract({
-          use: [
-            {
+          use: [{
               loader: 'css-loader',
               options: {
                 minimize: true,

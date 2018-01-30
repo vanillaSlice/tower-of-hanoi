@@ -5,12 +5,21 @@ const INITIAL_DISKS = 4;
 const MIN_DISKS = 1;
 const MAX_DISKS = 10;
 const SOLVE_TIMEOUT = 200;
+const ODD_SOLVE_SEQUENCE = [[0, 2], [0, 1], [1, 2]];
+const EVEN_SOLVE_SEQUENCE = [[0, 1], [0, 2], [1, 2]];
 
 class App {
   constructor() {
+    this.bindFunctions();
     this.initState();
     this.initElements();
     this.addListeners();
+  }
+
+  bindFunctions() {
+    this.handleRestartBtnClick = this.handleRestartBtnClick.bind(this);
+    this.handleSolveBtnClick = this.handleSolveBtnClick.bind(this);
+    this.solve = this.solve.bind(this);
   }
 
   initState() {
@@ -54,24 +63,19 @@ class App {
 
     // reset disk element classes and position back on first tower
     this.disks.forEach((disk, i) => {
-      disk.remove();
       disk.classList.remove('selected');
       disk.classList.toggle('hidden', i >= this.state.disks);
       this.towers[0].appendChild(disk);
     });
 
-    this.minMovesLabel.textContent = this.calculateMinimumMoves(this.state.disks);
-  }
-
-  calculateMinimumMoves(disks) {
-    return (2 ** disks) - 1;
+    this.minMovesLabel.textContent = (2 ** this.state.disks) - 1;
   }
 
   addListeners() {
     this.increaseDisksBtn.addEventListener('click', () => this.handleDisksBtnClick(this.state.disks + 1));
     this.decreaseDisksBtn.addEventListener('click', () => this.handleDisksBtnClick(this.state.disks - 1));
-    this.restartBtn.addEventListener('click', () => this.handleRestartBtnClick());
-    this.solveBtn.addEventListener('click', () => this.handleSolveBtnClick());
+    this.restartBtn.addEventListener('click', this.handleRestartBtnClick);
+    this.solveBtn.addEventListener('click', this.handleSolveBtnClick);
     this.towers.forEach((tower, i) => tower.addEventListener('click', () => this.handleTowerClick(i)));
   }
 
@@ -89,7 +93,7 @@ class App {
     this.state.moves = 0;
     this.state.towers = [this.range(this.state.disks), [], []];
     this.state.isBeingSolved = false;
-    clearTimeout(this.state.timeoutId);
+    clearTimeout(this.state.timeoutId); // important so solver stops
     this.state.timeoutId = null;
     this.state.selectedDisk = null;
     this.state.selectedTower = null;
@@ -103,45 +107,25 @@ class App {
   handleSolveBtnClick() {
     this.resetState();
     this.resetElements();
-
-    const isEven = this.state.disks % 2 === 0;
-    let sequence = 0;
-
-    const solve = () => {
-      if (isEven) {
-        if (sequence === 0) {
-          this.moveDisk(0, 1);
-          sequence += 1;
-        } else if (sequence === 1) {
-          this.moveDisk(0, 2);
-          sequence += 1;
-        } else {
-          this.moveDisk(1, 2);
-          sequence = 0;
-        }
-      } else if (sequence === 0) {
-        this.moveDisk(0, 2);
-        sequence += 1;
-      } else if (sequence === 1) {
-        this.moveDisk(0, 1);
-        sequence += 1;
-      } else {
-        this.moveDisk(1, 2);
-        sequence = 0;
-      }
-
-      this.state.moves += 1;
-      this.currentMovesLabel.textContent = this.state.moves;
-
-      if (!this.isSolved()) {
-        this.state.timeoutId = setTimeout(solve, SOLVE_TIMEOUT);
-      } else {
-        this.state.isBeingSolved = false;
-      }
-    };
-
+    const sequence = this.state.disks % 2 === 0 ? EVEN_SOLVE_SEQUENCE : ODD_SOLVE_SEQUENCE;
     this.state.isBeingSolved = true;
-    this.state.timeoutId = setTimeout(solve, SOLVE_TIMEOUT);
+    this.state.timeoutId = setTimeout(this.solve, SOLVE_TIMEOUT, sequence, 0);
+  }
+
+  solve(sequence, sequenceIndex) {
+    const pair = sequence[sequenceIndex];
+    this.moveDisk(pair[0], pair[1]);
+    const nextIndex = sequenceIndex === sequence.length - 1 ? 0 : sequenceIndex + 1;
+
+    this.state.moves += 1;
+    this.currentMovesLabel.textContent = this.state.moves;
+
+    // continue solving if not solved
+    if (!this.isSolved()) {
+      this.state.timeoutId = setTimeout(this.solve, SOLVE_TIMEOUT, sequence, nextIndex);
+    } else {
+      this.state.isBeingSolved = false;
+    }
   }
 
   moveDisk(d1, d2) {
@@ -172,29 +156,39 @@ class App {
   }
 
   handleTowerClick(tower) {
+    // don't interrupt if being solved!
     if (this.state.isBeingSolved) {
       return;
     }
 
     if (this.state.selectedDisk !== null) {
+      // make sure it is a valid move
       if (this.state.towers[tower][0] < this.state.selectedDisk) {
         return;
       }
 
+      // update if disk is moved to a different tower
       if (this.state.selectedTower !== tower) {
         this.towers[tower].prepend(this.disks[this.state.selectedDisk]);
         this.state.towers[this.state.selectedTower].shift();
         this.state.towers[tower].unshift(this.state.selectedDisk);
         this.state.moves += 1;
+        this.currentMovesLabel.textContent = this.state.moves;
+        this.winMessage.classList.toggle('hidden', !this.isSolved());
       }
+
+      // make sure we show that the disk is deselected
       this.disks[this.state.selectedDisk].classList.remove('selected');
+
+      // update the state
       this.state.selectedDisk = null;
       this.state.selectedTower = null;
-      this.currentMovesLabel.textContent = this.state.moves;
-      this.winMessage.classList.toggle('hidden', !this.isSolved());
     } else if (this.state.towers[tower][0] !== undefined) {
+      // make a note of the selected tower and disk
       this.state.selectedTower = tower;
       [this.state.selectedDisk] = this.state.towers[tower];
+
+      // make sure we show that the disk is selected
       this.disks[this.state.selectedDisk].classList.add('selected');
     }
   }

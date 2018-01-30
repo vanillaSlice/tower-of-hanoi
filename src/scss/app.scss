@@ -2,20 +2,18 @@ html {
   -webkit-tap-highlight-color: transparent;
 }
 
-.hidden {
-  display: none !important;
-}
-
 .container {
   margin: 0 auto;
   max-width: 58.5rem;
   padding: 0 0.75rem 2.68rem;
-  width: 100%;
+}
+
+.hidden {
+  display: none !important;
 }
 
 .row {
   max-width: 40rem;
-  width: 100%;
 }
 
 .controls {
@@ -24,13 +22,12 @@ html {
 
 .towers {
   position: relative;
+}
 
-  .win-message {
-    font-size: 2.7rem;
-    position: absolute;
-    width: 100%;
-    z-index: 3;
-  }
+.win-message {
+  font-size: 2.7rem;
+  position: absolute;
+  z-index: 3;
 }
 
 .tower {
@@ -42,19 +39,18 @@ html {
   height: 16rem;
   justify-content: flex-end;
   position: relative;
+}
 
-  .line {
-    border-left: 0.1rem solid #41403e;
-    bottom: 0;
-    height: 100%;
-    position: absolute;
-    width: 0.1rem;
-    z-index: 1;
-  }
+.line {
+  border-left: 0.1rem solid #41403e;
+  height: 100%;
+  position: absolute;
+  z-index: 1;
 }
 
 .disk {
   height: 1.5rem;
+  position: relative;
   transition: all 235ms ease 0s;
   z-index: 2;
 
@@ -67,4 +63,20 @@ html {
   .disk-#{$i} {
     width: $i * 10%;
   }
+}
+
+.background-1 {
+  background-color: #deefff;
+}
+
+.background-2 {
+  background-color: #d0dbc2;
+}
+
+.background-3 {
+  background-color: #f5f0c6;
+}
+
+.background-4 {
+  background-color: #f0cbc9;
 }

@@ -4,11 +4,12 @@ const path = require('path');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
 module.exports = {
   entry: [
-    'babel-polyfill',
+    '@babel/polyfill',
     './src/js/app.js'
   ],
 
@@ -24,35 +25,46 @@ module.exports = {
         use: [{
           loader: 'babel-loader',
           options: {
-            presets: ['env']
+            presets: ['@babel/preset-env']
           }
         }]
       },
       {
         test: /\.css$/,
-        use: ExtractTextPlugin.extract({
-          use: [{
-              loader: 'css-loader',
-              options: {
-                minimize: true,
-                sourceMap: true
-              }
-            },
-            {
-              loader: 'postcss-loader',
-              options: {
-                ident: 'postcss',
-                plugins: (loader) => [
-                  require('autoprefixer')()
-                ],
-                sourceMap: true
-              }
+        use: [
+          MiniCssExtractPlugin.loader,
+          {
+            loader: 'css-loader',
+            options: {
+              sourceMap: true
             }
-          ],
-          fallback: 'style-loader'
-        })
+          },
+          {
+            loader: 'postcss-loader',
+            options: {
+              ident: 'postcss',
+              plugins: (loader) => [
+                require('autoprefixer')()
+              ],
+              sourceMap: true
+            }
+          }
+        ]
       }
     ]
+  },
+
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        styles: {
+          name: 'styles',
+          test: /\.css$/,
+          chunks: 'all',
+          enforce: true
+        }
+      }
+    }
   },
 
   plugins: [
@@ -67,6 +79,15 @@ module.exports = {
       from: 'public',
       ignore: ['index.html']
     }]),
-    new ExtractTextPlugin('css/styles.css')
+    new MiniCssExtractPlugin({
+      filename: 'css/[name].css'
+    }),
+    new OptimizeCssAssetsPlugin({
+      cssProcessorOptions: {
+        map: {
+          inline: false
+        }
+      }
+    })
   ]
 };

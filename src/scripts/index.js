@@ -1,5 +1,5 @@
 import 'papercss/dist/paper.css';
-import '../css/app.css';
+import '../styles/style.css';
 
 const INITIAL_DISKS = 4;
 const MIN_DISKS = 1;

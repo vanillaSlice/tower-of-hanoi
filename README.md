@@ -1,37 +1,65 @@
 # Tower of Hanoi
 
+[![Latest Release](https://img.shields.io/github/release/vanillaSlice/tower-of-hanoi.svg)](https://github.com/vanillaSlice/tower-of-hanoi/releases/latest)
+[![Build Status](https://img.shields.io/travis/vanillaSlice/tower-of-hanoi/master.svg)](https://travis-ci.org/vanillaSlice/tower-of-hanoi)
+[![License](https://img.shields.io/github/license/vanillaSlice/tower-of-hanoi.svg)](LICENSE)
+
 Tower of Hanoi puzzle written to practice using [Babel](http://babeljs.io/) and [Webpack](https://webpack.js.org/).
-A working version can be viewed [here](https://vanillaslice.github.io/tower-of-hanoi/).
+A deployed version can be viewed [here](https://vanillaslice.github.io/tower-of-hanoi/).
+
+## Screenshot
+
+![Screenshot](/images/screenshot-1.png)
 
 ## Background
-Tower of Hanoi is a mathematical puzzle. It consists of three towers and a number of disks of different sizes, which can slide onto any tower. The puzzle starts with the disks in ascending order of size on the first tower.
 
-The objective of the puzzle is to move the entire stack of disks to the third tower, obeying the following simple rules:
+Tower of Hanoi is a mathematical puzzle. It consists of three towers and a number of disks of different sizes, which
+can slide onto any tower. The puzzle starts with the disks in ascending order of size on the first tower.
+
+The objective of the puzzle is to move the entire stack of disks to the third tower, obeying the following simple
+rules:
 
 1. Only one disk can be moved at a time.
 2. Each move consists of taking the upper disk from one of the stacks and placing it on top of another stack.
 3. No disk may be placed on top of a smaller disk.
 
-With 3 disks, the puzzle can be solved in 7 moves. The minimal number of moves required to solve a Tower of Hanoi puzzle is 2<sup>n</sup> − 1, where n is the number of disks.
+With 3 disks, the puzzle can be solved in 7 moves. The minimal number of moves required to solve a Tower of Hanoi
+puzzle is 2<sup>n</sup> − 1, where n is the number of disks.
 
 See [Wikipedia](https://en.wikipedia.org/wiki/Tower_of_Hanoi) for more information on Tower of Hanoi.
 
-## Installing dependencies
+## Getting Started
+
+### Prerequisites
+
+* [npm](https://www.npmjs.com/)
+
+### Installing Dependencies
+
+From your terminal/command prompt run:
+
 ```
-yarn install
+npm install
 ```
 
-## Running locally
+### Running
+
+From your terminal/command prompt run:
+
 ```
-yarn start
+npm start
 ```
 
-## Building distribution files
-```
-yarn build
-```
+Point your browser to [localhost:8080](http://localhost:8080).
 
-## Deploy
-```
-yarn deploy
-```
+## Technology Used
+
+For those of you that are interested, the technology used in this project includes:
+
+* [npm](https://www.npmjs.com/) (package management)
+* [Webpack](https://webpack.js.org/) (application bundler)
+* [PaperCSS](https://www.getpapercss.com/) (CSS framework)
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.

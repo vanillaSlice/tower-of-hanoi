@@ -1,5 +1,3 @@
-/* eslint-disable */
-
 const path = require('path');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -10,24 +8,25 @@ const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 module.exports = {
   entry: [
     '@babel/polyfill',
-    './src/js/app.js'
+    './src/scripts/index.js',
   ],
 
   output: {
-    filename: 'js/bundle.js',
-    path: path.resolve(__dirname, 'build')
+    filename: 'bundle.js',
+    path: path.resolve(__dirname, 'build'),
   },
 
   module: {
-    rules: [{
+    rules: [
+      {
         test: /\.js$/,
         exclude: /(node_modules)/,
         use: [{
           loader: 'babel-loader',
           options: {
-            presets: ['@babel/preset-env']
-          }
-        }]
+            presets: ['@babel/preset-env'],
+          },
+        }],
       },
       {
         test: /\.css$/,
@@ -36,22 +35,22 @@ module.exports = {
           {
             loader: 'css-loader',
             options: {
-              sourceMap: true
-            }
+              sourceMap: true,
+            },
           },
           {
             loader: 'postcss-loader',
             options: {
               ident: 'postcss',
-              plugins: (loader) => [
-                require('autoprefixer')()
+              plugins: loader => [
+                require('autoprefixer')(),
               ],
-              sourceMap: true
-            }
-          }
-        ]
-      }
-    ]
+              sourceMap: true,
+            },
+          },
+        ],
+      },
+    ],
   },
 
   optimization: {
@@ -61,10 +60,10 @@ module.exports = {
           name: 'styles',
           test: /\.css$/,
           chunks: 'all',
-          enforce: true
-        }
-      }
-    }
+          enforce: true,
+        },
+      },
+    },
   },
 
   plugins: [
@@ -72,22 +71,22 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: './public/index.html',
       minify: {
-        collapseWhitespace: true
-      }
+        collapseWhitespace: true,
+      },
     }),
     new CopyWebpackPlugin([{
       from: 'public',
-      ignore: ['index.html']
+      ignore: ['index.html'],
     }]),
     new MiniCssExtractPlugin({
-      filename: 'css/[name].css'
+      filename: '[name].css',
     }),
     new OptimizeCssAssetsPlugin({
       cssProcessorOptions: {
         map: {
-          inline: false
-        }
-      }
-    })
-  ]
+          inline: false,
+        },
+      },
+    }),
+  ],
 };

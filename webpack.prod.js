@@ -1,8 +1,6 @@
-/* eslint-disable */
-
 const merge = require('webpack-merge');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const common = require('./webpack.common.js');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
 module.exports = merge(common, {
   devtool: 'source-map',
@@ -10,9 +8,9 @@ module.exports = merge(common, {
   plugins: [
     new UglifyJsPlugin({
       uglifyOptions: {
-        mangle: true
+        mangle: true,
       },
-      sourceMap: true
-    })
-  ]
+      sourceMap: true,
+    }),
+  ],
 });

@@ -21,6 +21,7 @@
     "url": "https://github.com/vanillaSlice/tower-of-hanoi.git"
   },
   "scripts": {
+    "pretest": "run-s build:css",
     "test": "run-s test:*",
     "test:lint": "run-s test:lint:*",
     "test:lint:scss": "stylelint src/**/*.scss",

@@ -2,10 +2,38 @@
   "name": "tower-of-hanoi",
   "version": "1.0.0",
   "description": "Tower of Hanoi puzzle written to practice using Babel and Webpack",
-  "author": "Mike Lowe",
-  "private": true,
+  "keywords": [
+    "tower of hanoi"
+  ],
+  "homepage": "https://github.com/vanillaSlice/tower-of-hanoi#readme",
+  "bugs": {
+    "url": "https://github.com/vanillaSlice/tower-of-hanoi/issues",
+    "email": "mikelowedev@gmail.com"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Mike Lowe",
+    "email": "mikelowedev@gmail.com",
+    "url": "https://www.mikelowe.xyz/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vanillaSlice/tower-of-hanoi.git"
+  },
+  "scripts": {
+    "test": "run-s test:*",
+    "test:lint": "run-s test:lint:*",
+    "test:lint:scss": "stylelint src/**/*.scss",
+    "test:lint:js": "eslint src/**/*.js",
+    "start": "run-p start:*",
+    "start:scss": "node-sass src/scss -o src/css -w",
+    "start:webpack": "webpack-dev-server --open --config webpack.dev.js",
+    "build": "run-s build:*",
+    "build:css": "node-sass src/scss -o src/css",
+    "build:webpack": "webpack --config webpack.prod.js"
+  },
   "dependencies": {
-    "papercss": "^1.6.0"
+    "papercss": "^1.6.1"
   },
   "devDependencies": {
     "@babel/core": "^7.2.2",
@@ -38,19 +66,5 @@
     "webpack-dev-server": "^3.1.4",
     "webpack-merge": "^4.2.1"
   },
-  "homepage": "https://vanillaslice.github.io/tower-of-hanoi/",
-  "scripts": {
-    "lint": "run-s lint:*",
-    "lint:js": "eslint src/js",
-    "lint:scss": "stylelint src/scss",
-    "prebuild": "run-s lint",
-    "build": "run-s build:*",
-    "build:css": "node-sass src/scss -o src/css",
-    "build:webpack": "webpack --config webpack.prod.js",
-    "watch:scss": "node-sass src/scss -o src/css -w",
-    "start": "run-p watch:scss start:*",
-    "start:webpack": "webpack-dev-server --open --config webpack.dev.js",
-    "predeploy": "run-s build",
-    "deploy": "gh-pages -d dist"
-  }
+  "private": true
 }

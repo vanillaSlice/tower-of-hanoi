@@ -15,7 +15,7 @@ module.exports = {
 
   output: {
     filename: 'js/bundle.js',
-    path: path.resolve(__dirname, 'dist')
+    path: path.resolve(__dirname, 'build')
   },
 
   module: {
@@ -68,7 +68,7 @@ module.exports = {
   },
 
   plugins: [
-    new CleanWebpackPlugin('dist'),
+    new CleanWebpackPlugin('build'),
     new HtmlWebpackPlugin({
       template: './public/index.html',
       minify: {

@@ -5,7 +5,7 @@
 [![License](https://img.shields.io/github/license/vanillaSlice/tower-of-hanoi.svg)](LICENSE)
 
 Tower of Hanoi puzzle written to practice using [Babel](http://babeljs.io/) and [Webpack](https://webpack.js.org/).
-A deployed version can be viewed [here](https://vanillaslice.github.io/tower-of-hanoi/).
+A deployed version can be viewed [here](https://towerofhanoi.mikelowe.xyz/).
 
 ## Screenshot
 

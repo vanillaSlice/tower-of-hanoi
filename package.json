@@ -1,6 +1,6 @@
 {
   "name": "tower-of-hanoi",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Tower of Hanoi puzzle written to practice using Babel and Webpack",
   "keywords": [
     "tower of hanoi",

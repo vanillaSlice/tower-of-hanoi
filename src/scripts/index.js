@@ -1,3 +1,5 @@
+import { version } from '../../package.json';
+
 import 'papercss/dist/paper.css';
 import '../styles/style.css';
 
@@ -46,6 +48,7 @@ class App {
     this.getElements();
     this.resetElements();
     this.addEventListeners();
+    this.setVersion();
   }
 
   getElements() {
@@ -60,6 +63,7 @@ class App {
     this.diskElements = [...document.querySelectorAll('.js-disk')];
     this.towerElements = [...document.querySelectorAll('.js-tower')];
     this.minMovesLabel = document.querySelector('.js-min-moves-label');
+    this.versionElement = document.querySelector('.js-version');
   }
 
   resetElements() {
@@ -181,6 +185,10 @@ class App {
       [this.state.selectedDisk] = this.state.towers[towerIndex];
       this.diskElements[this.state.selectedDisk].classList.add('selected');
     }
+  }
+
+  setVersion() {
+    this.versionElement.textContent = `v${version}`;
   }
 
   show() {

@@ -1,6 +1,5 @@
 import { version } from '../../package.json';
 
-import 'papercss/dist/paper.css';
 import '../styles/style.css';
 
 const INITIAL_DISKS = 4;

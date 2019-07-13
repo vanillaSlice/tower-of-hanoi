@@ -35,9 +35,6 @@
     "build:css": "node-sass src/styles -o src/styles",
     "build:webpack": "webpack --config webpack.prod.js"
   },
-  "dependencies": {
-    "papercss": "^1.6.1"
-  },
   "devDependencies": {
     "@babel/core": "^7.5.4",
     "@babel/preset-env": "^7.5.4",
